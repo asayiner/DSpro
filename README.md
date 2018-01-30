@@ -1,2 +1,2 @@
 # DSpro
-Work-in-Progress Data Science Projects
+Work-in-Process Data Science Projects
