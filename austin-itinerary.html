@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Austin Trip Itinerary | Apr 2–5, 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #e8e8e8;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            height: 45vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #1a0a2e 0%, #16213e 30%, #0f3460 60%, #533483 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(255,107,53,0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(83,52,131,0.15) 0%, transparent 50%);
+            animation: drift 20s ease-in-out infinite;
+        }
+
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-2%, 2%) rotate(1deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #fff 0%, #f0c27f 50%, #fc5c7d 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.6);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+        }
+
+        .hero-content .dates {
+            margin-top: 1rem;
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: rgba(255,255,255,0.85);
+            letter-spacing: 0.05em;
+        }
+
+        .bat-divider {
+            display: block;
+            margin: 0.8rem auto;
+            font-size: 1.6rem;
+            opacity: 0.5;
+            letter-spacing: 0.5em;
+        }
+
+        /* Timeline */
+        .timeline-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 4rem;
+            position: relative;
+        }
+
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, rgba(255,107,53,0.3) 5%, rgba(83,52,131,0.3) 95%, transparent);
+            transform: translateX(-50%);
+        }
+
+        /* Day Card */
+        .day-section {
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .day-header {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            margin-bottom: 2rem;
+        }
+
+        .day-badge {
+            display: inline-block;
+            padding: 0.6rem 2rem;
+            border-radius: 50px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            position: relative;
+        }
+
+        .day-1 .day-badge { background: linear-gradient(135deg, #e65c00, #f9d423); color: #1a0a00; }
+        .day-2 .day-badge { background: linear-gradient(135deg, #4776e6, #8e54e9); color: #fff; }
+        .day-3 .day-badge { background: linear-gradient(135deg, #11998e, #38ef7d); color: #0a2a1a; }
+        .day-4 .day-badge { background: linear-gradient(135deg, #fc5c7d, #6a82fb); color: #fff; }
+
+        .day-date {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+            color: rgba(255,255,255,0.45);
+        }
+
+        .day-theme {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 300;
+            font-style: italic;
+            color: rgba(255,255,255,0.35);
+            margin-top: 0.3rem;
+        }
+
+        /* Activity Cards */
+        .activities {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .activity-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .activity-card:hover {
+            background: rgba(255,255,255,0.07);
+            border-color: rgba(255,255,255,0.12);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+
+        .activity-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .day-1 .activity-card::before { background: linear-gradient(to bottom, #e65c00, #f9d423); }
+        .day-2 .activity-card::before { background: linear-gradient(to bottom, #4776e6, #8e54e9); }
+        .day-3 .activity-card::before { background: linear-gradient(to bottom, #11998e, #38ef7d); }
+        .day-4 .activity-card::before { background: linear-gradient(to bottom, #fc5c7d, #6a82fb); }
+
+        .activity-icon {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .activity-info {
+            flex: 1;
+        }
+
+        .activity-time {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 0.25rem;
+        }
+
+        .activity-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.2rem;
+        }
+
+        .activity-desc {
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.5;
+        }
+
+        .optional-tag {
+            display: inline-block;
+            padding: 0.15rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: rgba(255,255,255,0.08);
+            color: rgba(255,255,255,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+
+        .divider-or {
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.25);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            padding: 0.3rem 0;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem 1rem 3rem;
+            color: rgba(255,255,255,0.2);
+            font-size: 0.8rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+        }
+
+        .footer span {
+            background: linear-gradient(135deg, #f0c27f, #fc5c7d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .hero { height: 35vh; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .timeline-container::before { left: 24px; }
+            .activity-card { padding: 1rem 1.2rem; }
+            .activity-icon { width: 40px; height: 40px; font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <div class="hero-content">
+            <p class="subtitle">Welcome to</p>
+            <h1>Austin, Texas</h1>
+            <span class="bat-divider">&#x1F987; &#x1F987; &#x1F987;</span>
+            <p class="dates">April 2 &ndash; 5, 2026</p>
+        </div>
+    </div>
+
+    <div class="timeline-container">
+
+        <!-- THURSDAY -->
+        <div class="day-section day-1">
+            <div class="day-header">
+                <span class="day-badge">Thursday</span>
+                <span class="day-date">April 2, 2026</span>
+                <span class="day-theme">Steaks, South Congress &amp; Live Music</span>
+            </div>
+            <div class="activities">
+                <div class="activity-card">
+                    <div class="activity-icon">&#x1F969;</div>
+                    <div class="activity-info">
+                        <div class="activity-time">Evening</div>
+                        <div class="activity-name">Saltgrass Steakhouse</div>
+                        <div class="activity-desc">Welcome dinner &mdash; kick off the trip with big Texas steaks.</div>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-icon">&#x1F378;</div>
+                    <div class="activity-info">
+                        <div class="activity-time">Night</div>
+                        <div class="activity-name">South Congress Bar Hopping</div>
+                        <div class="activity-desc">Stroll SoCo and hop between the bars along the strip.</div>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-icon">&#x1F3B6;</div>
+                    <div class="activity-info">
+                        <div class="activity-time">11:00 PM</div>
+                        <div class="activity-name">Continental Club &mdash; Late Night Jam Session</div>
+                        <div class="activity-desc">Iconic Austin live music venue. Catch the legendary late-night jam.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FRIDAY -->
+        <div class="day-section day-2">
+            <div class="day-header">
+                <span class="day-badge">Friday</span>
+                <span class="day-date">April 3, 2026</span>
+                <span class="day-theme">Downtown Sights &amp; Dirty Sixth</span>
+            </div>
+            <div class="activities">
+                <div class="activity-card">
+                    <div class="activity-icon">&#x1F3DB;</div>
+                    <div class="activity-info">
+                        <div class="activity-time">Daytime</div>
+                        <div class="activity-name">Walk Congress Avenue &amp; Texas State Capitol</div>
+                        <div class="activity-desc">Take in the avenue, pop into shops, and see the iconic pink granite Capitol building.</div>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-icon">&#x1F354;</div>
+                    <div class="activity-info">
+                        <div class="activity-time">Lunch / Dinner</div>
+                        <div class="activity-name">El Camino</div>
+                        <div class="activity-desc">Smash burgers, loaded tots, and frozen margs on Dirty 6th.</div>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-icon">&#x1F37B;</div>
+                    <div class="activity-info">
+                        <div class="activity-time">Night</div>
+                        <div class="activity-name">Dirty 6th &amp; East 6th Bar Hopping</div>
+                        <div class="activity-desc">Hit the rowdy Dirty 6th scene, then cross over to East 6th for craft cocktails and vibes.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SATURDAY -->
+        <div class="day-section day-3">
+            <div class="day-header">
+                <span class="day-badge">Saturday</span>
+                <span class="day-date">April 4, 2026</span>
+                <span class="day-theme">Nature, Coffee &amp; Good Food</span>
+            </div>
+            <div class="activities">
+                <div class="activity-card">
+                    <div class="activity-icon">&#x1F32E;</div>
+                    <div class="activity-info">
+                        <div class="activity-time">Morning &mdash; Option A</div>
+                        <div class="activity-name">Breakfast Tacos</div>
+                        <div class="activity-desc">Grab classic Austin breakfast tacos to fuel up for the day.</div>
+                    </div>
+                </div>
+                <div class="divider-or">&mdash; or &mdash;</div>
+                <div class="activity-card">
+                    <div class="activity-icon">&#x1F373;</div>
+                    <div class="activity-info">
+                        <div class="activity-time">Morning &mdash; Option B</div>
+                        <div class="activity-name">Proud Mary's Breakfast</div>
+                        <div class="activity-desc">Trendy brunch spot with Melbourne-inspired dishes and specialty coffee.</div>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-icon">&#x1F6B6;</div>
+                    <div class="activity-info">
+                        <div class="activity-time">Mid-Morning</div>
+                        <div class="activity-name">Ann &amp; Roy Butler Hike-and-Bike Trail</div>
+                        <div class="activity-desc">Scenic city hike along Lady Bird Lake &mdash; the quintessential Austin walk.</div>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-icon">&#x2615;</div>
+                    <div class="activity-info">
+                        <div class="activity-time">Midday</div>
+                        <div class="activity-name">Mozart's Coffee Roasters</div>
+                        <div class="activity-desc">Lakeside patio, great coffee, and people-watching on Lake Austin.</div>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-icon">&#x26F0;</div>
+                    <div class="activity-info">
+                        <div class="activity-time">Afternoon</div>
+                        <div class="activity-name">Mount Bonnell</div>
+                        <div class="activity-desc">Short climb to one of the best panoramic views of Austin and the Hill Country.</div>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-icon">&#x1F355;</div>
+                    <div class="activity-info">
+                        <div class="activity-time">Late Afternoon</div>
+                        <div class="activity-name">Cuantos Tacos</div>
+                        <div class="activity-desc">Refuel with tacos after the hike.</div>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-icon">&#x1F6D2;</div>
+                    <div class="activity-info">
+                        <div class="activity-time">Optional</div>
+                        <div class="activity-name">Central Market <span class="optional-tag">optional</span></div>
+                        <div class="activity-desc">Browse Austin's beloved gourmet grocery &mdash; great for snacks and local finds.</div>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-icon">&#x1F3E0;</div>
+                    <div class="activity-info">
+                        <div class="activity-time">Evening &mdash; Recharge</div>
+                        <div class="activity-name">Head Home</div>
+                        <div class="activity-desc">Rest up and get ready for the night.</div>
+                    </div>
+                </div>
+                <div class="divider-or">&mdash; evening options &mdash;</div>
+                <div class="activity-card">
+                    <div class="activity-icon">&#x1F943;</div>
+                    <div class="activity-info">
+                        <div class="activity-time">Night &mdash; Option A</div>
+                        <div class="activity-name">Rainey Street <span class="optional-tag">optional</span></div>
+                        <div class="activity-desc">Bar-hop the famous bungalow bars on Rainey Street.</div>
+                    </div>
+                </div>
+                <div class="divider-or">&mdash; or &mdash;</div>
+                <div class="activity-card">
+                    <div class="activity-icon">&#x1F483;</div>
+                    <div class="activity-info">
+                        <div class="activity-time">Night &mdash; Option B</div>
+                        <div class="activity-name">Clubs <span class="optional-tag">optional</span></div>
+                        <div class="activity-desc">Hit the dance floor at one of Austin's nightclubs.</div>
+                    </div>
+                </div>
+                <div class="divider-or">&mdash; or &mdash;</div>
+                <div class="activity-card">
+                    <div class="activity-icon">&#x1F6CB;</div>
+                    <div class="activity-info">
+                        <div class="activity-time">Night &mdash; Option C</div>
+                        <div class="activity-name">Chill at Home <span class="optional-tag">optional</span></div>
+                        <div class="activity-desc">Sometimes the best move is no move. Relax, games, good company.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SUNDAY -->
+        <div class="day-section day-4">
+            <div class="day-header">
+                <span class="day-badge">Sunday</span>
+                <span class="day-date">April 5, 2026</span>
+                <span class="day-theme">Easy Vibes &amp; Good Send-Off</span>
+            </div>
+            <div class="activities">
+                <div class="activity-card">
+                    <div class="activity-icon">&#x1F357;</div>
+                    <div class="activity-info">
+                        <div class="activity-time">Morning</div>
+                        <div class="activity-name">Fried Chicken Biscuit Breakfast</div>
+                        <div class="activity-desc">Start the chill day right with a crispy fried chicken biscuit.</div>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-icon">&#x1F3DE;</div>
+                    <div class="activity-info">
+                        <div class="activity-time">Midday</div>
+                        <div class="activity-name">Zilker Park &amp; Barton Creek</div>
+                        <div class="activity-desc">Hang out on the greenbelt, wade in the creek, soak up the sun.</div>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-icon">&#x1F3AC;</div>
+                    <div class="activity-info">
+                        <div class="activity-time">Afternoon</div>
+                        <div class="activity-name">Walk Around The Domain</div>
+                        <div class="activity-desc">Upscale outdoor shopping, dining, and a relaxed way to close out the trip.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p>Made with <span>&hearts;</span> for the crew &mdash; Austin 2026</p>
+    </div>
+
+</body>
+</html>
