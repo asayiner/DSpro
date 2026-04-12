@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peru Trip Itinerary | Jun 28 – Jul 4, 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: #e8e8e8;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Hero */
+        .hero {
+            position: relative;
+            height: 45vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #1a0a00 0%, #3e1a00 25%, #8b4513 50%, #c4883e 75%, #2e1505 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(196,136,62,0.12) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 80%, rgba(139,69,19,0.15) 0%, transparent 50%);
+            animation: drift 20s ease-in-out infinite;
+        }
+
+        @keyframes drift {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(-2%, 2%) rotate(1deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 4rem;
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #fff 0%, #f0c27f 40%, #d4a056 70%, #c4883e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.6);
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+        }
+
+        .hero-content .dates {
+            margin-top: 1rem;
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: rgba(255,255,255,0.85);
+            letter-spacing: 0.05em;
+        }
+
+        .hero-divider {
+            display: block;
+            margin: 0.8rem auto;
+            font-size: 1.4rem;
+            opacity: 0.5;
+            letter-spacing: 0.4em;
+        }
+
+        /* Location Banner */
+        .location-banner {
+            text-align: center;
+            padding: 2rem 1rem 0.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .location-badge {
+            display: inline-block;
+            padding: 0.4rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .location-lima .location-badge {
+            background: rgba(196,136,62,0.15);
+            color: #f0c27f;
+            border: 1px solid rgba(196,136,62,0.3);
+        }
+
+        .location-cusco .location-badge {
+            background: rgba(76,175,80,0.15);
+            color: #81c784;
+            border: 1px solid rgba(76,175,80,0.3);
+        }
+
+        /* Timeline */
+        .timeline-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 4rem;
+            position: relative;
+        }
+
+        .timeline-container::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, rgba(196,136,62,0.3) 5%, rgba(139,69,19,0.3) 95%, transparent);
+            transform: translateX(-50%);
+        }
+
+        /* Day Card */
+        .day-section {
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .day-header {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            margin-bottom: 2rem;
+        }
+
+        .day-badge {
+            display: inline-block;
+            padding: 0.6rem 2rem;
+            border-radius: 50px;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            position: relative;
+        }
+
+        .day-1 .day-badge { background: linear-gradient(135deg, #c4883e, #f0c27f); color: #1a0a00; }
+        .day-2 .day-badge { background: linear-gradient(135deg, #2e7d32, #81c784); color: #0a2a0a; }
+        .day-3 .day-badge { background: linear-gradient(135deg, #8b4513, #d4a056); color: #fff; }
+
+        .day-date {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+            color: rgba(255,255,255,0.45);
+        }
+
+        .day-theme {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 300;
+            font-style: italic;
+            color: rgba(255,255,255,0.35);
+            margin-top: 0.3rem;
+        }
+
+        /* Activity Cards */
+        .activities {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .activity-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .activity-card:hover {
+            background: rgba(255,255,255,0.07);
+            border-color: rgba(255,255,255,0.12);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+
+        .activity-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            border-radius: 4px 0 0 4px;
+        }
+
+        .day-1 .activity-card::before { background: linear-gradient(to bottom, #c4883e, #f0c27f); }
+        .day-2 .activity-card::before { background: linear-gradient(to bottom, #2e7d32, #81c784); }
+        .day-3 .activity-card::before { background: linear-gradient(to bottom, #8b4513, #d4a056); }
+
+        .activity-icon {
+            font-size: 1.8rem;
+            flex-shrink: 0;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.05);
+        }
+
+        .activity-info {
+            flex: 1;
+        }
+
+        .activity-time {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.4);
+            margin-bottom: 0.25rem;
+        }
+
+        .activity-name {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.2rem;
+        }
+
+        .activity-desc {
+            font-size: 0.85rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.5;
+        }
+
+        .reservation-tag {
+            display: inline-block;
+            padding: 0.15rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: rgba(76,175,80,0.15);
+            color: rgba(129,199,132,0.9);
+            border: 1px solid rgba(76,175,80,0.25);
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+
+        .menu-tag {
+            display: inline-block;
+            padding: 0.15rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            background: rgba(196,136,62,0.15);
+            color: rgba(240,194,127,0.9);
+            border: 1px solid rgba(196,136,62,0.25);
+            margin-left: 0.5rem;
+            vertical-align: middle;
+        }
+
+        .detail-row {
+            font-size: 0.75rem;
+            color: rgba(255,255,255,0.35);
+            margin-top: 0.4rem;
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .detail-row span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem 1rem 3rem;
+            color: rgba(255,255,255,0.2);
+            font-size: 0.8rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+        }
+
+        .footer span {
+            background: linear-gradient(135deg, #f0c27f, #c4883e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .hero { height: 35vh; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .timeline-container::before { left: 24px; }
+            .activity-card { padding: 1rem 1.2rem; }
+            .activity-icon { width: 40px; height: 40px; font-size: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero">
+        <div class="hero-content">
+            <p class="subtitle">Bienvenidos a</p>
+            <h1>Per&uacute;</h1>
+            <span class="hero-divider">&#x1F1F5;&#x1F1EA;</span>
+            <p class="dates">June 28 &ndash; July 4, 2026</p>
+        </div>
+    </div>
+
+    <div class="timeline-container">
+
+        <!-- LOCATION: LIMA -->
+        <div class="location-banner location-lima">
+            <span class="location-badge">&#x1F3D6; Lima</span>
+        </div>
+
+        <!-- SUNDAY JUN 28 -->
+        <div class="day-section day-1">
+            <div class="day-header">
+                <span class="day-badge">Sunday</span>
+                <span class="day-date">June 28, 2026</span>
+                <span class="day-theme">Lima&rsquo;s Finest Tables</span>
+            </div>
+            <div class="activities">
+                <div class="activity-card">
+                    <div class="activity-icon">&#x1F37D;</div>
+                    <div class="activity-info">
+                        <div class="activity-time">12:00 PM &mdash; Lunch</div>
+                        <div class="activity-name">Mayta by Jaime Pesaque <span class="reservation-tag">confirmed</span></div>
+                        <div class="activity-desc">Contemporary Peruvian cuisine blending coastal, Andean, and Amazonian flavors.</div>
+                        <div class="detail-row">
+                            <span>&#x1F464; Alper Sayiner</span>
+                            <span>&#x1F465; 2 people</span>
+                            <span>&#x1F374; A la carta</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="activity-card">
+                    <div class="activity-icon">&#x1F377;</div>
+                    <div class="activity-info">
+                        <div class="activity-time">7:30 PM &mdash; Dinner</div>
+                        <div class="activity-name">Isolina &mdash; Barranco <span class="reservation-tag">confirmed</span></div>
+                        <div class="activity-desc">Beloved Barranco tavern serving hearty, traditional Peruvian comfort food. 2do Piso.</div>
+                        <div class="detail-row">
+                            <span>&#x1F464; Alper Sayiner</span>
+                            <span>&#x1F465; 2 people</span>
+                            <span>&#x1F374; A la Carta</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LOCATION: CUSCO -->
+        <div class="location-banner location-cusco">
+            <span class="location-badge">&#x26F0; Cusco</span>
+        </div>
+
+        <!-- THURSDAY JUL 2 -->
+        <div class="day-section day-2">
+            <div class="day-header">
+                <span class="day-badge">Thursday</span>
+                <span class="day-date">July 2, 2026</span>
+                <span class="day-theme">Tasting Menu in the Sacred Valley</span>
+            </div>
+            <div class="activities">
+                <div class="activity-card">
+                    <div class="activity-icon">&#x2B50;</div>
+                    <div class="activity-info">
+                        <div class="activity-time">7:00 PM &mdash; Dinner</div>
+                        <div class="activity-name">Mauka <span class="reservation-tag">confirmed</span> <span class="menu-tag">tasting menu</span></div>
+                        <div class="activity-desc">Elevated Andean cuisine at Plazoleta Nazarenas in the heart of historic Cusco.</div>
+                        <div class="detail-row">
+                            <span>&#x1F464; Alper Sayiner</span>
+                            <span>&#x1F465; 2 guests</span>
+                            <span>&#x1F4CD; Plazoleta Nazarenas 223, Cusco</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SATURDAY JUL 4 -->
+        <div class="day-section day-3">
+            <div class="day-header">
+                <span class="day-badge">Saturday</span>
+                <span class="day-date">July 4, 2026</span>
+                <span class="day-theme">A Grand Finale</span>
+            </div>
+            <div class="activities">
+                <div class="activity-card">
+                    <div class="activity-icon">&#x1F31F;</div>
+                    <div class="activity-info">
+                        <div class="activity-time">8:00 PM &mdash; Dinner</div>
+                        <div class="activity-name">Kjolle <span class="reservation-tag">confirmed</span> <span class="menu-tag">mater surroundings 2026</span></div>
+                        <div class="activity-desc">P&iacute;a Le&oacute;n&rsquo;s celebrated restaurant exploring Peru&rsquo;s diverse ecosystems through ingredients and technique.</div>
+                        <div class="detail-row">
+                            <span>&#x1F464; Gokce Ustundag</span>
+                            <span>&#x1F465; 2 people</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p>Made with <span>&hearts;</span> for Alper &amp; Gokce &mdash; Per&uacute; 2026</p>
+    </div>
+
+</body>
+</html>
